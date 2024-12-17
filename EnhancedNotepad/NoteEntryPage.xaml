@@ -1,0 +1,81 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EnhancedNotepad.NoteEntryPage"
+             BackgroundColor="#f8f8f8">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="PrimaryTextColor">#2E2E2E</Color>
+            <Color x:Key="SecondaryTextColor">#757575</Color>
+            <Color x:Key="AccentColor">#009688</Color>
+            <Color x:Key="InputBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="PlaceholderColor">#BDBDBD</Color>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="Margin" Value="0,15,0,5" />
+            </Style>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{StaticResource InputBackgroundColor}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="Margin" Value="0,5,0,5" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlaceholderColor}" />
+                <Setter Property="HeightRequest" Value="40" />
+            </Style>
+            <Style x:Key="EditorStyle" TargetType="Editor">
+                <Setter Property="BackgroundColor" Value="{StaticResource InputBackgroundColor}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="Margin" Value="0,5,0,5" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlaceholderColor}" />
+                <Setter Property="HeightRequest" Value="150" />
+            </Style>
+            <Style x:Key="PickerStyle" TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="{StaticResource InputBackgroundColor}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="Margin" Value="0,5,0,5" />
+                <Setter Property="TitleColor" Value="{StaticResource PlaceholderColor}" />
+            </Style>
+            <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+                <Setter Property="BackgroundColor" Value="{StaticResource InputBackgroundColor}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="Margin" Value="0,5,0,5" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Margin" Value="0,10,0,0" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Title" Style="{StaticResource LabelStyle}" />
+            <Entry Text="{Binding Title}" Style="{StaticResource EntryStyle}" Placeholder="Enter title" />
+
+            <Label Text="Content" Style="{StaticResource LabelStyle}" />
+            <Editor Text="{Binding Content}" Style="{StaticResource EditorStyle}" Placeholder="Enter content" />
+
+            <Label Text="Category" Style="{StaticResource LabelStyle}" />
+            <Picker Title="Category" SelectedItem="{Binding Category}" Style="{StaticResource PickerStyle}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Personal</x:String>
+                        <x:String>Work</x:String>
+                        <x:String>Ideas</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Label Text="Due Date" Style="{StaticResource LabelStyle}" />
+            <DatePicker Date="{Binding DueDate}" Style="{StaticResource DatePickerStyle}" />
+
+            <Button Text="Save" Clicked="OnSaveClicked" Style="{StaticResource ButtonStyle}" />
+            <Button Text="Delete" Clicked="OnDeleteClicked" IsVisible="{Binding Id}" Style="{StaticResource ButtonStyle}" BackgroundColor="Red" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
